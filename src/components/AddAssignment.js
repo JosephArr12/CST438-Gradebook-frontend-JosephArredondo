@@ -17,7 +17,7 @@ import axios from 'axios';
 class Assignment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {selected: 0, assignments: [], courses:[], ids:[],email:"dwisneski@csumb.edu"};
+    this.state = {selected: 0, assignments: [], courses:[], ids:[],email:"dwisneski@csumb.edu",message:""};
   };
 
  
@@ -81,12 +81,16 @@ async getCourseData(){
     } )
   .then((response) => response) 
   .catch(err => console.error(err)); 
-  window.location.reload();
+  document.getElementById("name").value = "";
+  document.getElementById("date").valueAsDate = new Date();
+  alert("Assignment added!");
+
+  // window.location.reload();
   }
   
   render() {
       return (
-          <div align="center" >
+          <div align="center" className='content'>
             <div align="right" >
               <Button component={Link} to={{pathname:'/'}} 
                       variant="outlined" color="primary" disabled={false}  style={{margin: 10}}>
@@ -104,13 +108,15 @@ async getCourseData(){
   </select>
 
   <h3>Due Date</h3>
-  <input type="date" id ="date"/>
+  <input type="date" id ="date" />
 </form>
+
+<h3>{this.state.message}</h3>
 
 <br></br><br></br>
             <Button  
               onClick={()=>this.submitButton()}
-                    variant="outlined" color="primary" disabled={false}  style={{margin: 10}}>
+                    variant="outlined" color="primary" disabled={false}  style={{margin: 10}} id ="submit">
               Create
             </Button>
           </div>
